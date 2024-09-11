@@ -1,0 +1,15 @@
+[Unit]
+Description=MKTXP Exporter
+After=network.target
+
+[Service]
+User={{ user }}
+WorkingDirectory=/etc/mktxp/
+PreExec="source {{ install_dir }}/bin/activate;"
+ExecStart={{ install_dir }}/bin/mktxp --cfg-dir /etc/mktxp export
+RestartForceExitStatus=100
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=default.target
